@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Hello {
 	
-	String str="Hello Neha..";
+	String str="Hello Neha...";
 	
 	@GetMapping("/hello")
 	public String showData(){
