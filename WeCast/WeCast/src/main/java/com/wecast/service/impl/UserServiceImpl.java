@@ -67,14 +67,13 @@ public class UserServiceImpl implements UserService {
 
 
 	@Override
-	public User findById(int id) {
+	public User findById(int id) throws ServiceException{
 		Optional<User> user = userRepository.findById(id);
-		if(user!=null) {
+		if(user.isPresent()) {
 			  return user.get(); 
 			  } else {
-		  System.out.println("Record not present"); 
+		  throw new ServiceException("Record not present"); 
 		  }
-		return null;
 	}
 
 

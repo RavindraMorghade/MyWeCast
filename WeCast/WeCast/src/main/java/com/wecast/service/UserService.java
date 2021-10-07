@@ -13,7 +13,7 @@ public interface UserService {
 
 	public User updateUser(int id ,User user) throws ServiceException;
 	
-	public User findById(int id);
+	public User findById(int id) throws ServiceException;
 	
 	public List<User> findAllUsers() throws ServiceException;
 	

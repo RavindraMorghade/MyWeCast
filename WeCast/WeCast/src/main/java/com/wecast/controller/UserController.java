@@ -3,6 +3,8 @@ package com.wecast.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,13 +23,13 @@ public class UserController {
 	private UserService userService;
 
 	@PostMapping("/adduser")
-	public User addUser(@RequestBody User user) {
+	public ResponseEntity<User> addUser(@RequestBody User user) {
 		User returnUser = userService.addUser(user);
-		return returnUser;
+		return ResponseEntity.ok().body(returnUser);
 	}
 
 	@GetMapping("/finduserbyemailandpassword/{email}/{password}")
-	public User findUserByEmailAndPassword(@PathVariable String email, @PathVariable String password) {
+	public ResponseEntity<User> findUserByEmailAndPassword(@PathVariable String email, @PathVariable String password) {
 		User user = null;
 		try {
 			user = userService.findByEmailAndPassword(email, password);
@@ -35,28 +37,35 @@ public class UserController {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 		}
-		return user;
+		return ResponseEntity.ok().body(user);
 	}
 
 	@PutMapping("/updateuser/{id}")
-	public User updateUser(@PathVariable int id, @RequestBody User user) {
+	public ResponseEntity<String> updateUser(@PathVariable int id, @RequestBody User user) {
+		User retUser = null;
 		try {
-			return userService.updateUser(id, user);
+			retUser = userService.updateUser(id, user);
 		} catch (ServiceException e) {
 			// e.printStackTrace();
 			System.out.println(e.getMessage());
+			return ResponseEntity.ok().body(e.getMessage());
 		}
-		return null;
+		return ResponseEntity.ok().body("User successfully updated");
 	}
 
 	@GetMapping("/finduserbyid/{id}")
-	public User findUserById(@PathVariable int id) {
-		User user = userService.findById(id);
-		return user;
+	public ResponseEntity<User> findUserById(@PathVariable int id) {
+		User user = null;
+		try {
+			user = userService.findById(id);
+		} catch (ServiceException e) {
+			System.out.println(e.getMessage());
+		}
+		return ResponseEntity.ok().body(user);
 	}
 
 	@GetMapping("/findallusers")
-	public List<User> getAllUsers() {
+	public ResponseEntity<List<User>> getAllUsers() {
 		List<User> users = null;
 		try {
 			users = userService.findAllUsers();
@@ -65,19 +74,19 @@ public class UserController {
 			System.out.println(e.getMessage());
 		}
 
-		return users;
+		return ResponseEntity.ok().body(users);
 	}
 
 	@DeleteMapping("/deleteuserbyid/{id}")
-	public String deleteUser(@PathVariable int id) {
+	public ResponseEntity<String> deleteUser(@PathVariable int id) {
 		userService.deleteById(id);
-		return "User deleted successfully";
+		return ResponseEntity.ok().body("User deleted successfully");
 	}
 
 	@GetMapping("/getfriendsuggestion/{city}")
-	public List<User> getSuggestions(@PathVariable String city) {
+	public ResponseEntity<List<User>> getSuggestions(@PathVariable String city) {
 		List<User> suggestedList = userService.getFriendsSuggestion(city);
-		return suggestedList;
+		return ResponseEntity.ok().body(suggestedList);
 
 	}
 
