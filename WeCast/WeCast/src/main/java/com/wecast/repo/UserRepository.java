@@ -23,5 +23,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
  //@Query("SELECT u.id, u.name, u.lastName FROM User u JOIN Address a ON "+"a.id=u.address WHERE a.city=:city")
 
-
+   //@Query(" select * from user where user_id in(4,12,15)")
+   @Query("SELECT u FROM User u WHERE u.id in(:userlist)")
+   List<User> findAllUsers(@Param("userlist")List<Integer> userlist);
+   // List<T> findAllById(Iterable<ID> ids);
 }
