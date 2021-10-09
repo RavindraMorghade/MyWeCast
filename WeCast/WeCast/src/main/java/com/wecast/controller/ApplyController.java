@@ -16,49 +16,58 @@ import com.wecast.request.Apply;
 import com.wecast.request.User;
 import com.wecast.service.ApplyService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
+@Slf4j
 public class ApplyController {
-	
+
 	@Autowired
 	private ApplyService applyService;
-	
+
 	@PostMapping("/apply")
 	public ResponseEntity<Apply> applyForJob(@RequestBody Apply apply) {
 		Apply aply = applyService.applyJob(apply);
 		return ResponseEntity.ok().body(aply);
-		
+
 	}
-	
+
 	@GetMapping("/retrieveappliedby/{job_id}")
-	public  ResponseEntity<List<User>> retrieveAppliedBy(@PathVariable int job_id){
-		List<User> list=null;
+	public ResponseEntity<List<User>> retrieveAppliedBy(@PathVariable int job_id) {
+		List<User> list = null;
 		try {
-			 list = applyService.retrieveApplyBy(job_id);
+			list = applyService.retrieveApplyBy(job_id);
 		} catch (ServiceException e) {
-			System.out.println(e.getMessage());
+			log.error(e.getMessage());
 		}
 		return ResponseEntity.ok().body(list);
-		
+
 	}
-	
+
 	@PutMapping("/selectstatus/{job_id}/{user_id}")
 	public ResponseEntity<String> selectUserForProject(@PathVariable int job_id, @PathVariable int user_id) {
 		Apply ap = applyService.selectUserForProject(job_id, user_id);
-		if(ap != null) {
-		return ResponseEntity.ok().body("Selected for project");
+		if (ap != null) {
+			return ResponseEntity.ok().body("Selected for project");
 		}
 		return null;
-		
+
 	}
-	
+
 	@GetMapping("/selectedusers/{job_id}")
-	public ResponseEntity<List<Apply>> findSelectedUsers(@PathVariable int job_id){
-		List<Apply> al = applyService.findSelectedUsers(job_id);
-		if(al!=null) {
-			return ResponseEntity.ok().body(al);
+	public ResponseEntity<List<User>> findSelectedUsers(@PathVariable int job_id) {
+		List<User> al;
+		try {
+			al = applyService.findSelectedUsers(job_id);
+			if (al != null) {
+				return ResponseEntity.ok().body(al);
+			}
+		} catch (ServiceException e) {
+			log.error(e.getMessage());
 		}
+
 		return null;
-		
+
 	}
 
 }

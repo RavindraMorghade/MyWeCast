@@ -3,7 +3,6 @@ package com.wecast.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +16,10 @@ import com.wecast.exception.ServiceException;
 import com.wecast.request.User;
 import com.wecast.service.UserService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
+@Slf4j
 public class UserController {
 	@Autowired
 	private UserService userService;
@@ -34,8 +36,7 @@ public class UserController {
 		try {
 			user = userService.findByEmailAndPassword(email, password);
 		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
+			log.error(e.getMessage());
 		}
 		return ResponseEntity.ok().body(user);
 	}
@@ -46,8 +47,7 @@ public class UserController {
 		try {
 			retUser = userService.updateUser(id, user);
 		} catch (ServiceException e) {
-			// e.printStackTrace();
-			System.out.println(e.getMessage());
+			log.error(e.getMessage());
 			return ResponseEntity.ok().body(e.getMessage());
 		}
 		return ResponseEntity.ok().body("User successfully updated");
@@ -59,7 +59,7 @@ public class UserController {
 		try {
 			user = userService.findById(id);
 		} catch (ServiceException e) {
-			System.out.println(e.getMessage());
+			log.error(e.getMessage());
 		}
 		return ResponseEntity.ok().body(user);
 	}
@@ -70,8 +70,7 @@ public class UserController {
 		try {
 			users = userService.findAllUsers();
 		} catch (ServiceException e) {
-			// e.printStackTrace();
-			System.out.println(e.getMessage());
+			log.error(e.getMessage());
 		}
 
 		return ResponseEntity.ok().body(users);

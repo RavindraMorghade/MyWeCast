@@ -15,7 +15,10 @@ import com.wecast.exception.ServiceException;
 import com.wecast.request.Project;
 import com.wecast.service.ProjectService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
+@Slf4j
 public class ProjectController {
 
 	@Autowired
@@ -34,7 +37,7 @@ public class ProjectController {
 		try {
 			projs = projService.getProjects(user_id);
 		} catch (ServiceException e) {
-			System.out.println(e.getMessage());
+			log.error(e.getMessage());
 		}
 		return projs;
 	}
@@ -47,7 +50,7 @@ public class ProjectController {
 		try {
 			retpro = projService.updateProject(pid, project);
 		} catch (ServiceException e) {
-			System.out.println(e.getMessage());
+			log.error(e.getMessage());
 		}
 		return retpro;
 

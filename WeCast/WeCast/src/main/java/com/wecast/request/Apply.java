@@ -6,49 +6,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
-@Table(name="apply")
+@Data
+@Table(name = "apply")
 public class Apply {
-	
+
 	@Id
 	@GeneratedValue
 	private int aId;
-	
-	@Column(name="apply_by_userId")
-	private int userId;
-	
-	@Column(name="jobid")
-	private int jobId;
-	
-	@Column(name="status")
-	private String status;
-	
-	
-	
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public int getaId() {
-		return aId;
-	}
-	public void setaId(int aId) {
-		this.aId = aId;
-	}
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-	public int getJobId() {
-		return jobId;
-	}
-	public void setJobId(int jobId) {
-		this.jobId = jobId;
-	}
 
-	
+	@Column(name = "apply_by_userId")
+	private int userId;
+
+	@Column(name = "jobid")
+	private int jobId;
+
+	@Column(name = "status")
+	private String status;
+
 }

@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "user")
 public class User {
-	
+
 	@Id
 	@Column(name = "user_id")
 	@GeneratedValue
@@ -32,7 +32,7 @@ public class User {
 
 	@Column(name = "last_name")
 	private String lastName;
-	
+
 	@Column(name = "date_of_birth")
 	private String dob;
 
@@ -44,84 +44,11 @@ public class User {
 
 	@Column(name = "reg_date")
 	private String regDate;
-	
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address address;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Measurements measurement;
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getDob() {
-		return dob;
-	}
-
-	public void setDob(String dob) {
-		this.dob = dob;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getRegDate() {
-		return regDate;
-	}
-
-	public void setRegDate(String regDate) {
-		this.regDate = regDate;
-	}
-
-	public Measurements getMeasurement() {
-		return measurement;
-	}
-
-	public void setMeasurement(Measurements measurement) {
-		this.measurement = measurement;
-	}
 
 }

@@ -8,7 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
+@Data
 @Table(name = "job")
 public class Job {
 
@@ -34,63 +37,5 @@ public class Job {
 
 	@Column(name = "no_of_openings")
 	private int noOfOpenigs;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public int getCreatedById() {
-		return createdById;
-	}
-
-	public void setCreatedById(int createdById) {
-		this.createdById = createdById;
-	}
-
-	public String getCompanyName() {
-		return companyName;
-	}
-
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
-
-	public int getNoOfOpenigs() {
-		return noOfOpenigs;
-	}
-
-	public void setNoOfOpenigs(int noOfOpenigs) {
-		this.noOfOpenigs = noOfOpenigs;
-	}
-
-	public String getCreatedDT() {
-		return createdDT;
-	}
-
-	public void setCreatedDT(String createdDT) {
-		this.createdDT = createdDT;
-	}
-
-	public String getExpiryDT() {
-		return expiryDT;
-	}
-
-	public void setExpiryDT(String expiryDT) {
-		this.expiryDT = expiryDT;
-	}
-
-	
 
 }

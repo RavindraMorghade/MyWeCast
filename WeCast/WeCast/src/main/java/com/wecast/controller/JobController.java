@@ -12,7 +12,10 @@ import com.wecast.exception.ServiceException;
 import com.wecast.request.Job;
 import com.wecast.service.JobService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
+@Slf4j
 public class JobController {
 
 	@Autowired
@@ -31,7 +34,7 @@ public class JobController {
 		try {
 			jb = jobService.getById(id);
 		} catch (ServiceException e) {
-			System.out.println(e.getMessage());
+			log.error(e.getMessage());
 		}
 		return ResponseEntity.ok().body(jb);
 

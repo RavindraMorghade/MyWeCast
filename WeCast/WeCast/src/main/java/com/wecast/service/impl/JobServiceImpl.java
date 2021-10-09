@@ -1,15 +1,12 @@
 package com.wecast.service.impl;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.wecast.exception.ServiceException;
 import com.wecast.repo.JobRepository;
-import com.wecast.request.Apply;
 import com.wecast.request.Job;
 import com.wecast.service.JobService;
 
@@ -18,8 +15,6 @@ public class JobServiceImpl implements JobService {
 
 	@Autowired
 	private JobRepository jobRepository;
-	
-	
 
 	@Override
 	public Job createJob(Job job) {
@@ -37,7 +32,5 @@ public class JobServiceImpl implements JobService {
 		}
 
 	}
-
-	
 
 }

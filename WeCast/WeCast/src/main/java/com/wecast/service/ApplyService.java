@@ -14,6 +14,6 @@ public interface ApplyService{
 
 	public Apply selectUserForProject(int jobId, int userId);
 
-	public List<Apply> findSelectedUsers(int jobId);
+	public List<User> findSelectedUsers(int jobId) throws ServiceException;
 
 }
