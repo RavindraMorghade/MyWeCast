@@ -13,7 +13,7 @@ public interface ProjectService{
 	
 	 public Project updateProject(int pid, Project project) throws ServiceException;
 
-	public void deleteProject(int pid);
+	public String deleteProject(int pid);
 	 
 
 

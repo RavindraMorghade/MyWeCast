@@ -26,9 +26,15 @@ public class ApplyController {
 	private ApplyService applyService;
 
 	@PostMapping("/apply")
-	public ResponseEntity<Apply> applyForJob(@RequestBody Apply apply) {
-		Apply aply = applyService.applyJob(apply);
-		return ResponseEntity.ok().body(aply);
+	public ResponseEntity<String> applyForJob(@RequestBody Apply apply) {
+		Apply aply = null;
+		try {
+			aply = applyService.applyJob(apply);
+		} catch (ServiceException e) {
+			log.error(e.getMessage());
+			return ResponseEntity.ok().body("You already aaplied for this job");
+		}
+		return ResponseEntity.ok().body("You aaplied successfully");
 
 	}
 
@@ -56,11 +62,11 @@ public class ApplyController {
 
 	@GetMapping("/selectedusers/{job_id}")
 	public ResponseEntity<List<User>> findSelectedUsers(@PathVariable int job_id) {
-		List<User> al;
+		List<User> userList;
 		try {
-			al = applyService.findSelectedUsers(job_id);
-			if (al != null) {
-				return ResponseEntity.ok().body(al);
+			userList = applyService.findSelectedUsers(job_id);
+			if (userList != null) {
+				return ResponseEntity.ok().body(userList);
 			}
 		} catch (ServiceException e) {
 			log.error(e.getMessage());

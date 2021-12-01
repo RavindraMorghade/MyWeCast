@@ -14,10 +14,12 @@ import com.wecast.exception.ServiceException;
 import com.wecast.request.Friend;
 import com.wecast.service.FriendService;
 
+import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
+@Builder
 public class FriendController {
 
 	@Autowired

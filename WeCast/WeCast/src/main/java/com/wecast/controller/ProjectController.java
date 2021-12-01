@@ -3,6 +3,7 @@ package com.wecast.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,26 +26,26 @@ public class ProjectController {
 	private ProjectService projService;
 
 	@PostMapping("/addproject")
-	public Project addProject(@RequestBody Project project) {
+	public ResponseEntity<Project>addProject(@RequestBody Project project) {
 		Project pro = projService.addProject(project);
-		return pro;
+		return ResponseEntity.ok().body(pro);
 
 	}
 
 	@GetMapping("/getprojects/{user_id}")
-	public List<Project> getProjects(@PathVariable int user_id) {
+	public ResponseEntity<List<Project>> getProjects(@PathVariable int user_id) {
 		List<Project> projs = null;
 		try {
 			projs = projService.getProjects(user_id);
 		} catch (ServiceException e) {
 			log.error(e.getMessage());
 		}
-		return projs;
+		return ResponseEntity.ok().body(projs);
 	}
 
 	
 	@PutMapping("/updateproject/{pid}")
-	public Project updateProjectBypid(@PathVariable int pid, @RequestBody Project project) {
+	public ResponseEntity<Project> updateProjectBypid(@PathVariable int pid, @RequestBody Project project) {
 		//Project proj = null;
 		Project retpro = null;
 		try {
@@ -52,12 +53,13 @@ public class ProjectController {
 		} catch (ServiceException e) {
 			log.error(e.getMessage());
 		}
-		return retpro;
+		return ResponseEntity.ok().body(retpro);
 
 	}
 	
 	@DeleteMapping("/deleteprojectbyid/{pid}")
-	public void deleteProject(@PathVariable int pid) {
+	public ResponseEntity<String> deleteProject(@PathVariable int pid) {
 		projService.deleteProject(pid);
+		return ResponseEntity.ok().body("Project deleted successfully");
 	}
 }

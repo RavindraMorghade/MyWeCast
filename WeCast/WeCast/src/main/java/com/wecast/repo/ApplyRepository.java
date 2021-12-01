@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.wecast.request.Apply;
 import com.wecast.request.Friend;
+import com.wecast.request.LikeAndComment;
 
 public interface ApplyRepository extends JpaRepository<Apply, Integer> {
 	
@@ -20,8 +21,10 @@ public interface ApplyRepository extends JpaRepository<Apply, Integer> {
 	@Query(" SELECT a FROM Apply a WHERE a.jobId =:jobId and a.userId =:userId")
 	public Apply findStatus(@Param("jobId") int jobId, @Param("userId") int userId);
 	
+	
 	 //select * from apply where jobId=23 and status='selected';
 	 @Query("SELECT a FROM Apply a WHERE a.jobId =:jobId and a.status='selected'")
 	 public List<Apply> findSelectedUsers(@Param("jobId") int jobId);
+	 
 
 }

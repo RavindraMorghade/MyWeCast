@@ -12,10 +12,12 @@ import com.wecast.exception.ServiceException;
 import com.wecast.request.Job;
 import com.wecast.service.JobService;
 
+import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
+@Builder
 public class JobController {
 
 	@Autowired

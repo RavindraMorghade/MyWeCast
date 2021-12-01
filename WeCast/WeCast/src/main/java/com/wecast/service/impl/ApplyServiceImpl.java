@@ -26,10 +26,16 @@ public class ApplyServiceImpl implements ApplyService {
 	private UserRepository userRepository;
 
 	@Override
-	public Apply applyJob(Apply apply) {
+	public Apply applyJob(Apply apply) throws ServiceException {
 		log.info("In applyJob Method() ");
+		Apply recordCheak = applyRepository.findStatus(apply.getJobId(), apply.getUserId());
+		if(recordCheak!=null) {
+			throw new ServiceException("You already applied for the same...");
+		}else
+		{
 		Apply a = applyRepository.save(apply);
 		return a;
+		}
 	}
 
 	@Override

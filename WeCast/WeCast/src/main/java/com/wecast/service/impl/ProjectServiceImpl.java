@@ -49,9 +49,9 @@ public class ProjectServiceImpl implements ProjectService {
 		return retpro;
 	}
 	
-	public void deleteProject(int pid) {
+	public String deleteProject(int pid) {
 		projReposotory.deleteById(pid);
-		System.out.println("Project deleted successfully");
+		return ("Project deleted successfully");
 	}
 
 }

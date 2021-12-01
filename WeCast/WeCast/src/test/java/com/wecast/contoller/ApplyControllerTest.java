@@ -1,4 +1,4 @@
-package com.wecast;
+package com.wecast.contoller;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,15 +22,10 @@ import com.wecast.repo.ApplyRepository;
 import com.wecast.request.Apply;
 import com.wecast.service.ApplyService;
 
-@SpringBootTest
-//@RunWith(MockitoJUnitRunner.class)
-class WeCastApplicationTests {
+@RunWith(MockitoJUnitRunner.class)
+//@SpringBootTest
+public class ApplyControllerTest {
 
-	@Test
-	void contextLoads() {
-	}
-	
-	
 	@InjectMocks
 	private ApplyController controller;
 
@@ -49,7 +46,7 @@ class WeCastApplicationTests {
 		applyList.add(apply);
 
 	}
-	
+
 	@Test
 	public void applyForJobTest() throws ServiceException {
 		when(service.applyJob(apply)).thenReturn(apply);
@@ -62,14 +59,8 @@ class WeCastApplicationTests {
 	 * ResponseEntity<String> responseEntity = controller.applyForJob(apply);
 	 * Assert.assertNull(responseEntity.getBody()); }
 	 */
-	
-	
-	
-	
-	
-	
-	
-
-	
+	public void retrieveAppliedBy() {
+	//	when(service.)
+	}
 
 }

@@ -18,5 +18,6 @@ public class EmployeeController {
 		Employee e = employeeService.registerUser(employee);
 		return ResponseEntity.ok().body("User registered successfully"); 
 	}
-
+	
+	
 }

@@ -8,7 +8,7 @@ import com.wecast.request.User;
 
 public interface ApplyService{
 
-	public Apply applyJob(Apply apply);
+	public Apply applyJob(Apply apply) throws ServiceException;
 	
 	public List<User> retrieveApplyBy(int job_id) throws ServiceException;
 

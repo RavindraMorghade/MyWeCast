@@ -1,5 +1,7 @@
 package com.wecast.controller;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +22,7 @@ public class FileUploadController {
 	private FileUploadHelper fileUploadHelper;
 
 	@PostMapping("/upload-file")
-	public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+	public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @PathParam("user_id") int user_id) {
 		log.info(file.getOriginalFilename());
 		log.info("FileSize " + file.getSize());
 		log.info(file.getContentType());
@@ -31,13 +33,13 @@ public class FileUploadController {
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Request must contain body");
 			}
 
-			if (file.getContentType().equals("image/jpeg")) {
+			if (file.getContentType().equals("image/jpeg/jpg")) {
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Only jpeg allowed");
 			}
 
 			// File upload code
 
-			boolean f = fileUploadHelper.uploadFile(file);
+			boolean f = fileUploadHelper.uploadFile(file,user_id);
 			if (f) {
 				return ResponseEntity.ok("File uploaded successfully");
 			}
